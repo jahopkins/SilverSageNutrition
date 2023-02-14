@@ -84,71 +84,29 @@ struct ContentView: View {
                             .tabItem {
                                 Label("Nutrients", systemImage: "face.smiling.inverse")
                             }
+                            .toolbar(.visible, for: .tabBar)
+
+                                    .toolbarBackground(Color("PrimaryColor"), for: .tabBar)
                         foodNameListView()
                             .tabItem{
                                 Label("Food", systemImage: "fork.knife")
                             }
+                            .toolbar(.visible, for: .tabBar)
+
+                                    .toolbarBackground(Color("PrimaryColor"), for: .tabBar)
                         accountView()
                             .tabItem{
                                 Label("Account", systemImage: "person")
                             }
+                            .toolbar(.visible, for: .tabBar)
+
+                            .toolbarBackground(Color.white, for: .tabBar)
                             
                         
                         
                         
                         
-                        
-                        //                  ListOfFoodsView()
-                        //                Text("You are signed in")
-                        //                model.getData()
-                        //                List (model.list) { item in
-                        //                    Text(item.name)
-                        // commenting out
-                        //                VStack(spacing: 5) {
-                        ////                    ListOfFoodsView()
-                        //                    Button(action: {
-                        //                        model.getData()
-                        //                        NavigationLink(destination: ListOfFoodsView())
-                        //                    }, label: {
-                        //                        Text("View Nutrients")
-                        //                    })
-                        
-                        //                    Button(action: {
-                        //                        model.getData()
-                        //                    }, label: {
-                        //                        Text("View Nutrients")
-                        //                    }
-                        //                    )
-                        //
-                        //                    List (model.list) { item in
-                        //                        Text(item.name)
-                        //                    }
-                        //                    TextField("Add food", text: $newFoodAdded)
-                        //                    Button {
-                        //                        // add meal
-                        //                        api.fetchData(userMeal: newFoodAdded) { (FoodArray)in
-                        //                            for foood in [FoodArray] {
-                        //                                print(foood.foods[0].food_name)
-                        //                                model.addFood(foodName: foood.foods[0].food_name, sodium: foood.foods[0].nf_sodium)
-                        //
-                        //                                newFoodAdded = ""
-                        //
-                        //                            }
-                        //                        }
-                        //                    } label: {
-                        //                        Text("Save meal")
-                        //                    }
-                        // commented out
-                        //                    Button(action: {
-                        //                        appViewModell.signOut()
-                        //                    }, label: {
-                        //                        Text("Sign Out")
-                        //                            .foregroundColor(Color.blue)
-                        //                    })
-                        //
-                        //                }
-                        // commented out
-                        
+                      
                     }
                     .tint(Color("SecondaryColor2"))
                 }
@@ -165,18 +123,10 @@ struct ContentView: View {
         }
     
     }
-//    init () {
-//        model.getData()
-//    }
-}
 
-        //         defines a new computed proprety called body
-        //         'some view' type means it will return something that confomrs to the view protocol, which is the layout
-        //         view protocol has one requirement: 'body' property that returns some view
-        //         contnetview_previews struct conforms to the previewprovider protocol
-        //         it isnt part of code, it only previews the ui
+}
+       
 struct WelcomeView: View {
-//    let logo = Image("Logo")
     var body: some View {
         ZStack {
             Color("PrimaryColor").edgesIgnoringSafeArea(.all)
@@ -224,30 +174,10 @@ struct SignInView: View {
            
     @State var email = ""
     @State var password = ""
-//            @State var newFoodAdded = ""
-//            @State var api = apiCall()
-//            //    @State var model = ViewModel()
-//            @ObservedObject var model = ViewModel()
+           
     @EnvironmentObject var appViewModel: AppViewModel
     var body: some View {
-//                List (model.list) { item in
-//                    Text(item.name)
-//                }
-        //        Button {
-        //            // add meal
-        //            api.fetchData(userMeal: newFoodAdded) { (FoodArray)in
-        //                for foood in [FoodArray] {
-        //                    print(foood.foods[0].food_name)
-        //                    model.addFood(foodName: foood.foods[0].food_name, sodium: foood.foods[0].nf_sodium)
-        //
-        //                    newFoodAdded = ""
-        //
-        //                }
-        //            }
-        //        } label: {
-        //            Text("Save meal")
-        //        }
-//                Divider()
+//
         ZStack {
             Color("PrimaryColor").edgesIgnoringSafeArea(.all)
             VStack{
@@ -313,10 +243,7 @@ struct SignUpView: View {
            
     @State var email = ""
     @State var password = ""
-//            @State var newFoodAdded = ""
-//            @State var api = apiCall()
-//            //    @State var model = ViewModel()
-//            @ObservedObject var model = ViewModel()
+//
     @EnvironmentObject var appViewModel: AppViewModel
     var body: some View {
 //        Divider()
@@ -501,21 +428,17 @@ struct accountView: View {
                 Button(action: {
                     appViewModell.signOut()
                 }, label: {
-                    Text("Sign Out")
-                        .foregroundColor(Color.green)
+                    Text("Sign Out".uppercased())
+                        .padding()
+//                        .frame(maxWidth: .infinity)
+                        .background(Color("PrimaryColor2").cornerRadius(10))
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(width: 200)
                 })
 
             }
-//                    .toolbar {
-//                        ToolbarItem(placement:
-//                                        ToolbarItemPlacement
-//                            .bottomBar) {
-//                                Button(action: {
-//                                }, label: {
-//                                    Text("Sign Out")
-//                                })
-//                            }
-//                    }
+//                    
             }
         }
     }

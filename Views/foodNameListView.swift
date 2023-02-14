@@ -24,7 +24,20 @@ struct foodNameListView: View {
                 Color("PrimaryColor").edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 20){
+                    
                     Section {
+                        NavigationLink(destination: GetNutrientsView()
+                            .navigationTitle("AddFood")
+                            .background(Color(.white))
+                                       
+                        )
+                        {
+                            
+                            Text("Add New Food")
+                            
+                            
+                            
+                        }
                         List (model.list) { item in
                             VStack(alignment: .leading) {
                                 Text("\(item.name)").font(.title)
@@ -41,9 +54,6 @@ struct foodNameListView: View {
 //                                        .foregroundColor(Color("SecondaryColor2"))
 //                                        .font(.footnote)
 //                                }
-                                
-                                
-                                
                                 
                                 .listRowInsets(.init(top:0, leading: 40, bottom: 0, trailing: 40))
                             }
@@ -76,24 +86,14 @@ struct foodNameListView: View {
                             
                             
                         }
-                        .background(Color("PrimaryColor2"))
+                        .background(Color("PrimaryColor"))
                         .scrollContentBackground(.hidden)
                     }
                 header: {
                     Text("\(model.formattedDate)")
                 }
                     
-                    NavigationLink(destination: GetNutrientsView()
-                        .navigationTitle("AddFood")
-                                   
-                    )
-                    {
-                        
-                        Text("Add New Food")
-                        
-                        
-                        
-                    }
+                  
                 }
                 //            .onAppear(perform: { model.getData() })
                 //            .onAppear(perform: { model.getFomattedDate()})

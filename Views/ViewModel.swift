@@ -13,17 +13,13 @@ import FirebaseAuth
 class ViewModel: ObservableObject {
     @Published var list = [Food] ()
     @Published var nutList = [NutrientItem] ()
-//    @Published var nutList = ""
     @Published var nutrientList = [FoodArray] ()
     @Published var formattedDate = ""
-//    let userID: String = Auth.auth().currentUser!.uid
+    @Published var creationStatus = ""
     var userID = ""
     let date = Date()
     let df = DateFormatter()
     var dateUserId: String = ""
-    @Published var creationStatus = ""
-//    @Published var showError = false
-//    @State var formatedID = ""
     func getFomattedDate() {
         df.dateStyle = DateFormatter.Style.medium
         df.timeStyle = DateFormatter.Style.none
@@ -38,14 +34,9 @@ class ViewModel: ObservableObject {
         df.timeStyle = DateFormatter.Style.none
         let newDate = df.string(from: date)
         self.dateUserId = newDate.replacingOccurrences(of: "/", with: "-") + self.userID
-//        DispatchQueue.main.async {
-//             self.dateUserId = newDate + self.userID
-////            self.formatedID = self.dateUserId.replacingOccurrences(of: "/", with: "-")
-//        }
-//        print(dateUserId)
         print(newDate.replacingOccurrences(of: "/", with: "-") + self.userID)
         print(dateUserId)
-//        print(dateUserId)
+
         
     }
     
@@ -104,15 +95,10 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-//        else {
-//            print("Add an Item to View a list")
-//        }
+
     }
     
-    //    func findTotals(list) {
-    // create an empty interger
-    //add each number to that interger
-    //    }
+  
     
     
     
@@ -133,12 +119,7 @@ class ViewModel: ObservableObject {
     ) {
         self.getUserId()
         let db = Firestore.firestore()
-        // ask ansel how would i solve this problem without using the exclamation point
-        // i used it without but i got an error
-        // i was sstuck for a while because all thr
-        // the if statement was pointless because the id wil never be nill, i
-        // have to find a way to check if it is in the database or use merge
-        //        if userID == nil {
+       
         db.collection("Users").document(dateUserId).setData([:]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -149,7 +130,7 @@ class ViewModel: ObservableObject {
                 print(self.creationStatus)
             }
         }
-        //        }
+        
         
         db.collection("Users").document(dateUserId).collection("foods").addDocument(data: ["name": foodName,
                                                                                         "sodium": sodium,
@@ -167,7 +148,7 @@ class ViewModel: ObservableObject {
                                                                                            "units": units,
                                                                                         
                                                                                        ]){ error in
-            //        ref.setData(["name": foodName, "sodium": sodium]) { error in
+           
             if error == nil {
                 
                 // no errors
@@ -176,7 +157,6 @@ class ViewModel: ObservableObject {
             }
             else {
                 
-//                self.creationStatus = "Unable to find nutrient data for this \(foodName)"
             }
         }
     }
@@ -184,17 +164,12 @@ class ViewModel: ObservableObject {
     // update firebase when we add a new item
     
         
-    // trying this function to create seperate documents for each nutrient
+   
     
     func addSupplement(nutrient: String, amount: Double) {
         self.getUserId()
         let db = Firestore.firestore()
-        // ask ansel how would i solve this problem without using the exclamation point
-        // i used it without but i got an error
-        // i was sstuck for a while because all thr
-        // the if statement was pointless because the id wil never be nill, i
-        // have to find a way to check if it is in the database or use merge
-        //        if userID == nil {
+        
         db.collection("Users").document(dateUserId).setData([:]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -209,10 +184,9 @@ class ViewModel: ObservableObject {
             if error == nil {
                 // no errors
                 self.getData()
-                print("new function")
             }
             else {
-                // handle error
+                print(error as Any)
             }
         }
         
@@ -226,12 +200,7 @@ class ViewModel: ObservableObject {
         // using the information from the api call to update decrease supplements
         self.getUserId()
         let db = Firestore.firestore()
-        // ask ansel how would i solve this problem without using the exclamation point
-        // i used it without but i got an error
-        // i was sstuck for a while because all thr
-        // the if statement was pointless because the id wil never be nill, i
-        // have to find a way to check if it is in the database or use merge
-        //        if userID == nil {
+        
         db.collection("Users").document(dateUserId).setData([:]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -269,82 +238,6 @@ class ViewModel: ObservableObject {
         
     }
     
-    // function to gett all supplements that I changed
-        
-        
-//        func addSupplements(sodium: Double, iron: Double, potassium: Double, magnesium: Double,
-//                            lysine: Double,
-//                            niacin: Double,
-//                            vitaminB12: Double,
-//                            vitaminC: Double,
-//                            folicAcid: Double,
-//                            cholesterol: Double,
-//                            calcium: Double) {
-//            self.getUserId()
-//            // dateUserId
-//
-//            // replaced with dateUserId
-//            //  db.collection("Users").document(userID).collection("nutrients").document("GVPjoRry0l8cmSHLgi3s").updateData([
-//
-//            let db = Firestore.firestore()
-//            db.collection("Users").document(dateUserId).collection("nutrients").document(dateUserId).setData([
-//                "Iron": FieldValue.increment(Int64(iron)),
-//                "Potassium": FieldValue.increment(Int64(potassium)),
-//                "Sodium": FieldValue.increment(Int64(sodium)),
-//                "Magnesium": FieldValue.increment(Int64(magnesium)),
-//                "Lysine": FieldValue.increment(Int64(lysine)),
-//                "VitaminB12": FieldValue.increment(Int64(vitaminB12)),
-//                "VitaminC": FieldValue.increment(Int64(vitaminC)),
-//                "Folic Acid": FieldValue.increment(Int64(sodium)),
-//                "Cholesterol": FieldValue.increment(Int64(sodium)),
-//                "Calcium": FieldValue.increment(Int64(sodium)),
-//                "Niacin": FieldValue.increment(Int64(niacin)),
-//            ], merge: true)
-//            { error in
-//                //        ref.setData(["name": foodName, "sodium": sodium]) { error in
-//                if error == nil {
-//                    // no errors
-//                    self.getNutrientTotals()
-//                    print("retrieving Data")
-//                }
-//                else {
-//                    // handle error
-//                }
-//            }
-//
-//
-//        }
-        
-//        func findSodium() {
-//
-//            for item in self.list {
-//                self.SodiumTot += item.sodium
-//            }
-//            print(self.SodiumTot)
-//            print(self.list)
-//
-//
-//        }
-//        func findIron() {
-//
-//            for item in self.list {
-//                self.IronTot += item.iron
-//            }
-//            print(self.IronTot)
-//            print(self.list)
-//
-//
-//        }
-//        func findPot() {
-//
-//            for item in self.list {
-//                self.PotTot += item.potassium
-//            }
-//            print(self.PotTot)
-//            print(self.list)
-//
-//
-//        }
     
     func getAllNutrients() {
         // accessing user id
@@ -374,21 +267,18 @@ class ViewModel: ObservableObject {
                                 
                             }
                             
-                            //                            print(self.list)
                         }
-                        // get all documents and create foods
+                       
                         
                     }
                     else {
-                        // handle error
+                        print(error?.localizedDescription as Any)
                         
                     }
                 }
             }
         }
-//        else {
-//            print("Add an Item to View a list")
-//        }
+
     }
         
     }

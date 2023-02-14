@@ -48,21 +48,9 @@ class apiCall: ObservableObject {
                     self.allNutrients = [results]
                 }
                 
-                //                DispatchQueue.main.async {
-                //                    completion(foodDescription)
-                //                }
-                
-                
-                //                let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                //                DispatchQueue.main.async {
-                //                    for item in response.foods{
-                //                        self.foodDescription = item.foodDescription
-                //                    }
-                //                }
-                
-                //                print("Success: \(foodDescription)")
+               
             }
-            //            catch { print(error) this was all i had
+           
             catch {
                 let error = error
                 self.apiStatus = "Could not locate data"
@@ -74,18 +62,6 @@ class apiCall: ObservableObject {
         task.resume()
     }
     
-//    func addFood(foodName: String, sodium: Double) {
-//        let db = Firestore.firestore()
-//        db.collection("foods").addDocument(data: ["name": foodName, "sodium": sodium]) { error in
-////        ref.setData(["name": foodName, "sodium": sodium]) { error in
-//            if error == nil {
-//                // no errors
-//                self.getData()
-//            }
-//            else {
-//                // handle error
-//            }
-//        }
-//    }
+
     
 }

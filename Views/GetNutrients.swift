@@ -24,18 +24,18 @@ struct GetNutrientsView: View {
         {
             Spacer()
             Text("Enter an item to track daily nutrients").font(.subheadline)
-            
+            TextField("Serving size:", text: $quantity)
+                .padding()
+                .background(Color.gray.opacity(0.3).cornerRadius(10))
+                .foregroundColor(.blue)
+                .frame(width: 150)
             TextField("Food name:", text: $newFoodAdded)
                 .padding()
                 .background(Color.gray.opacity(0.3).cornerRadius(10))
                 .foregroundColor(.blue)
 //                .textFieldStyle(.roundedBorder)
                 .font(.headline)
-            TextField("Serving size:", text: $quantity)
-                .padding()
-                .background(Color.gray.opacity(0.3).cornerRadius(10))
-                .foregroundColor(.blue)
-                .frame(width: 150)
+            
            
 
             Button {
@@ -73,25 +73,12 @@ struct GetNutrientsView: View {
                         model.addSupplement(nutrient: "Cholesterol", amount: foood.foods[0].nf_cholesterol)
                         model.addSupplement(nutrient: "Calcium", amount: foood.foods[0].full_nutrients[19].value)
                         
-                        
-                        // commenting out to try new functions
-                        
-//                        model.addSupplements(sodium: foood.foods[0].nf_sodium,
-//                                             iron: foood.foods[0].full_nutrients[0].value,
-//                                             potassium: foood.foods[0].nf_potassium,
-//                                             magnesium: foood.foods[0].full_nutrients[21].value,
-//                                             lysine: foood.foods[0].full_nutrients[63].value,
-//                                             niacin: foood.foods[0].full_nutrients[47].value,
-//                                             vitaminB12: foood.foods[0].full_nutrients[51].value,
-//                                             vitaminC: foood.foods[0].full_nutrients[45].value,
-//                                             folicAcid: foood.foods[0].full_nutrients[55].value,
-//                                             cholesterol: foood.foods[0].nf_cholesterol,
-//                                             calcium: foood.foods[0].full_nutrients[19].value
-//                        )
+                    
                         
                        
                         showFoodConfirmation.toggle()
                         newFoodAdded = ""
+                        quantity = ""
                         
                         
                         
@@ -105,26 +92,16 @@ struct GetNutrientsView: View {
                 Text("Add Food".uppercased())
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.green.cornerRadius(10))
+                    .background(Color("PrimaryColor2").cornerRadius(10))
                     .foregroundColor(.white)
                     .font(.headline)
             }
 //            if model.showError == true {
-        .alert(api.apiStatus, isPresented: $showFoodConfirmation) {
+        .alert("Successfully added \(self.itemConsumed)", isPresented: $showFoodConfirmation) {
                     // add buttons here
                 }
                 
-//            }
-//            else {
-//                .alert("Successfully Added", isPresented: $showFoodConfirmation ) {
-//                    // add buttons here
-//                }
-//
-//            }
-        
-//        message: {
-//            Text("\(newFoodAdded) was successfully added")
-//        }
+
             
             
             
@@ -132,15 +109,7 @@ struct GetNutrientsView: View {
             }
         
         .padding()
-//        Button {
-//            model.getData()
-//        }
-//    label: {
-//        Text("Add to data")
-//    }
 
-//            ApiResultView()
-//                .environmentObject(model)
         }
     
     }

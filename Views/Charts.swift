@@ -17,16 +17,17 @@ struct Recommendation: Identifiable {
 
 var data: [Recommendation] = [
     .init(nutrient: "Calcium", count: 1000),
-    .init(nutrient: "Vitamin B12", count: 2.4),
-    .init(nutrient: "Vitamin C", count: 75),
+    .init(nutrient: "Vit-B12", count: 2.4),
+    .init(nutrient: "Vit-C", count: 75),
     .init(nutrient: "Iron", count: 18),
     .init(nutrient: "Magnesium", count: 310),
-    .init(nutrient: "Niacon", count: 14),
+    .init(nutrient: "Niacin", count: 14),
     .init(nutrient: "Potassium", count: 260),
     .init(nutrient: "Sodium", count: 1500)
     ]
 
 struct Charts: View {
+    @ObservedObject var model = ViewModel()
     //    let comparisonValues = [
     //        Recommendation(amount: 1000, nutrientType: .calcium(.female)),
     //        Recommendation(amount: 2.4, nutrientType: .vitaminb12(.female)),
@@ -38,15 +39,34 @@ struct Charts: View {
     //        Recommendation(amount: 1500, nutrientType: .sodium(.female))
     //    ]
     var body: some View {
-        Chart {
-            ForEach(data) { shape in
-                BarMark(x: .value("Nutrient", shape.nutrient),
-                        y: .value("Value", shape.count)
-                )
+        VStack {
+            GroupBox ("Recommended Daily Values") {
+                
+                Chart {
+                    ForEach(data) { shape in
+                        BarMark(x: .value("Nutrient", shape.nutrient),
+                                y: .value("Value", shape.count)
+                        )
+                        
+                        
+                    }
+                    
+                    
+                }
+                .background(.white)
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
+                
+                
             }
         }
+       
     }
+    
 }
+
+
 
 
 struct Charts_Previews: PreviewProvider {
